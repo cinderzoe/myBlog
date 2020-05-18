@@ -14,22 +14,27 @@ export default {
   },
   created(){
     var _this=this;
-    this.$axios.post('/checktoken',{
-      headers:{
-          Authorization:window.localStorage.getItem('tokenid')
+    if(window.localStorage.getItem('tokenid')){
+      this.$axios.post('/checktoken',{
+        headers:{
+            Authorization:window.localStorage.getItem('tokenid')
+          }
+      })
+      .then(function (res) {
+        console.log(res)
+        if (res.data.status==200) {
+          _this.$store.commit('changeUserName', res.data.user)
+          console.log(res.data.user)
+          console.log(_this.$store.state.user_name)
         }
-    })
-    .then(function (res) {
-      console.log(res)
-      if (res.data.status==200) {
-        _this.$store.commit('changeUserName', res.data.user)
-        console.log(res.data.user)
-        console.log(_this.$store.state.user_name)
-      }
-    })
-    .catch(function (err) {
+      })
+      .catch(function (err) {
+        this.$router.replace('/login')
+      });
+    }else{
       this.$router.replace('/login')
-    });
+    }
+    
   },
   methods:{
     getInfo(){

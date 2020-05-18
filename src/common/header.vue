@@ -83,7 +83,7 @@ a {
   display: block;
 }
 #header{background:linear-gradient(to right, #ccb739, #2f907e, #c1625a);width: 100%;position: fixed;top: 0;left: 0;height: 1.4rem;font-size: 0.4rem;color: #fff;z-index: 99;}
-#userId{font-size: 0.4rem;color: #fff;line-height: 1.2rem;font-family: "黑体"}
+#userId{font-size: 0.5rem;color: #fff;line-height: 1.4rem;font-family: "黑体"}
 #closePopu{background-image: url(../assets/login_close.svg);background-size: 100%;background-repeat: no-repeat;background-position: center;position: absolute;right: 10px;top: 10px;width: 15px;height: 15px;cursor: pointer;}
 #user-name{color: #399c9c;font-size: 18px;} /*预留色#399c9c*/
 #menu{position: absolute;top: 0;height: 0.8rem;width: 1rem;top: 0.3rem;cursor: pointer;z-index: 2;transition: 0.3s;background: url(../assets/menu.png) center no-repeat;background-size: 100% auto;}

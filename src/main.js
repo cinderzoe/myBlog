@@ -26,13 +26,14 @@ Vue.use(VueAwesomeSwiper)
 Vue.use(vueJsonp)
 
 
-if (window.location.href.indexOf('lazyzoe.cn') != -1) {
-  window.mode = 'API'
-  axios.defaults.baseURL = 'http://www.lazyzoe.cn:3000'
-} else {
-  window.mode = 'DEV'
-  axios.defaults.baseURL = 'http://localhost:3000'  //这里是访问的后端接口
-}
+// if (window.location.href.indexOf('lazyzoe.cn') != -1) {
+//   window.mode = 'API'
+//   axios.defaults.baseURL = 'http://www.lazyzoe.cn:3000'
+// } else {
+//   window.mode = 'DEV'
+//   axios.defaults.baseURL = 'http://localhost:3000'  //这里是访问的后端接口
+// }
+axios.defaults.baseURL = 'http://www.lazyzoe.cn:3000'
 
 
 new Vue({
