@@ -20,7 +20,7 @@ export default {
             Authorization:window.localStorage.getItem('tokenid')
           }
       })
-      .then(function (res) {
+      .then(res=>{
         console.log(res)
         if (res.data.status==200) {
           _this.$store.commit('changeUserName', res.data.user)
@@ -28,13 +28,12 @@ export default {
           console.log(_this.$store.state.user_name)
         }
       })
-      .catch(function (err) {
+      .catch(err=>{
         this.$router.replace('/login')
       });
     }else{
       this.$router.replace('/login')
     }
-    
   },
   methods:{
     getInfo(){

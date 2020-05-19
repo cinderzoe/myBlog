@@ -17,8 +17,7 @@
       </transition>
       <!-- 音乐导航 -->
       <div class="music-navin" v-if="(this.$route.path==='/music')">
-        <div class="music-router">推荐</div>
-        <div class="music-router">喜欢</div>
+        <div class="music-router">热歌推荐</div>
       </div>
       <!-- 用户登陆 -->
       <div id="userId" class="fr" v-else>{{username}}</div>

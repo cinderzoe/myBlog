@@ -48,10 +48,8 @@ export default {
         this.$nextTick(() => {
           this.$refs.audio.play()
         })
-        console.log("播放了")
       }else{
         this.$refs.audio.pause()
-        console.log("暂停了")
       }
       //console.log(this.$refs.audio.currentTime)
     },
@@ -63,7 +61,7 @@ export default {
     }
   },
   created(){
-    console.log(this.$store.state.audioShow)
+
   }
   ,
   methods:{
@@ -81,8 +79,8 @@ export default {
     updateTime(e) {
        if(this.$store.state.temCurrentTime!==-1){
           this.$refs.audio.currentTime=this.$store.state.temCurrentTime;
+          this.$store.commit('changeTemCurTime',-1)
        }
-       console.log(this.currentTime)
        this.currentTime = e.target.currentTime;  //获取audio当前播放时间
        var currentTime=Math.floor(this.currentTime);
        var _this=this;

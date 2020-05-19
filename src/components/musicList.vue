@@ -9,9 +9,9 @@
     				<div class="author">{{item.ar[0].name}}</div>
     			</div>
     		</div>
-    		<div @click="addLove(i)" :class="musicListIt[i].bool?'store-btn loveSong':'store-btn'"></div>
+    		<div @click="addLove(i)" :class="musicListIt[i].bool?'store-btn loveSong':'store-btn'" style="display: none;"></div>
     	</div>
-    	<p style="color: #999;font-size: 0.2rem;">这里已经是底部了~</p>
+    	<p style="color: #999;font-size: 0.4rem;">这里已经是底部了~</p>
   	</div>
   </div> 
 </template>
@@ -120,7 +120,7 @@ a {
   color: #42b983;
 }
 .lists{position: relative;}
-.list-cont{margin: 0.3rem 0;text-align: left;background: url(../assets/music-pause.png) 80% center no-repeat;background-size: 0.8rem 0.8rem;}
+.list-cont{margin: 0.3rem 0;text-align: left;background: url(../assets/music-pause.png) 95% center no-repeat;background-size: 0.8rem 0.8rem;}
 .lists.active .list-cont{background-image: url(../assets/music-play.png);}
 .list-cont .pic{width: 1.4rem;height: 1.4rem;background-repeat: no-repeat;background-position: center;background-size: 100% auto;border-radius: 0.1rem;}
 .list-cont .info{padding-left: 0.15rem;}

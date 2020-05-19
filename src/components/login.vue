@@ -71,8 +71,8 @@ export default {
               else{
                 this.$store.commit('changeUserName', this.username)
                 window.localStorage.setItem('tokenid',res.data.tokenid)
-              	this.$router.replace('/index')
-
+              	this.$router.replace('/')
+                this.$store.commit('headerShowOr',true)
               }
               this.$toast(res.data.msg);
               
