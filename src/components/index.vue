@@ -26,6 +26,8 @@ export default {
           _this.$store.commit('changeUserName', res.data.user)
           console.log(res.data.user)
           console.log(_this.$store.state.user_name)
+        }else if(res.data.status=202){
+          this.$router.replace('/login')
         }
       })
       .catch(err=>{

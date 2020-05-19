@@ -32,7 +32,8 @@ export default {
 
   },
   beforeMount(){
-  	this.$axios.post('http://hellojinx.cn:4000/top/list?idx=0').then(res=>{
+  	this.$axios.post('http://hellojinx.cn:4000/top/list?idx=0')
+    .then(res=>{
   		this.musicAll=res.data.playlist.tracks;
   		this.musicLists=this.musicAll.slice(0,15)
   		this.addBool()

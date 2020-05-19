@@ -131,7 +131,7 @@ export default {
         var slide=document.getElementsByClassName('van-slider__bar')[0]
         slide.style.width=percent
        }
-       if (timeObj != undefined) {
+       if (timeObj != undefined) { //检测歌词才滚动
          this.lyricScroll(audioCurTime)
        }
     },
