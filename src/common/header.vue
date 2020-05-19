@@ -12,15 +12,17 @@
         <div id="nav" v-if="navShow">
           <div @click="toggleNav"><router-link to="/">首页</router-link></div>
           <div @click="toggleNav"><router-link to="/music">音乐</router-link></div>
-          <div @click="toggleNav"><router-link to="/music">说说</router-link></div>
+          <div @click="toggleNav"><router-link to="/article">文章</router-link></div>
         </div>
       </transition>
       <!-- 音乐导航 -->
-      <div class="music-navin" v-if="(this.$route.path==='/music')">
+      <div class="music-navin item-nav" v-if="musicShow">
         <div class="music-router">热歌推荐</div>
       </div>
       <!-- 用户登陆 -->
-      <div id="userId" class="fr" v-else>{{username}}</div>
+      <div id="userId" class="fr item-nav" v-if="userShow">{{username}}</div>
+      <!-- 文章 -->
+      <div class="writeArticle item-nav fr" v-if="articleShow"><router-link to="/articleDetails">写文章</router-link></div>
     </div>
 
   </div>
@@ -32,7 +34,7 @@
       return {
         loginPopu:false,
         navShow:false,
-        menuToggle:false
+        menuToggle:false,
       };
     },
     computed:{ //computed里面的属性不能在data里面绑定
@@ -40,8 +42,33 @@
         get:function(){
           return this.$store.state.user_name;
         },
-        set:function(newValue){
-          return this.$store.state.user_name;
+        set:function(){
+          
+        }
+      },
+      musicShow:{
+        get:function(){
+          return this.$store.state.musicNav
+        },
+        set:function(){
+          
+        }
+      },
+      userShow:{
+        get:function(){
+          return this.$store.state.userNav
+        },
+        set:function(){
+          
+        }
+        
+      },
+      articleShow:{
+        get:function(){
+          return this.$store.state.articleNav
+        },
+        set:function(){
+          
         }
       }
     },
@@ -61,7 +88,7 @@
         this.navShow=!this.navShow;
         this.menuToggle=!this.menuToggle;
       }
-    }
+    },
   }
 </script>
 
@@ -109,5 +136,8 @@ a {
 .menufade-enter, .menufade-leave-to {
   transform: translateX(4rem);
 }
-.music-router{display: inline-block;line-height: 1.4rem;margin: 0 0.4rem;font-size: 0.5rem;}
+.item-nav{display: inline-block;line-height: 1.4rem;margin: 0 0.4rem;font-size: 0.5rem;}
+.music-navin{display: inline-block;}
+.writeArticle{display: inline-block;padding-left: 0.8rem;background: url(../assets/write.png) left center no-repeat;background-size: auto 0.8rem;}
+.writeArticle a{color: #fff;}
 </style>

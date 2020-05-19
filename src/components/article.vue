@@ -1,23 +1,19 @@
 <template>
-  <div class="music">
-    <music-list></music-list>
+  <div id="article">
+    这里是article
   </div>
 </template>
 
 <script>
-import musicList from './musicList'
 export default {
-  name: 'music',
+  name: '',
   data () {
     return {
-      musicPic:'http://p2.music.126.net/r5GreclAlTqB1vk2Yjke-A==/109951164968090284.jpg'
+     
     }
   },
-  components: {
-      'music-list':musicList
-  },
   activated(){
-    this.$store.commit('changeNavShow',{music:true,user:false,article:false})
+  	this.$store.commit('changeNavShow',{music:false,user:false,article:true})
   }
 }
 </script>

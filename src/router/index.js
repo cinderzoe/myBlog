@@ -5,6 +5,8 @@ import login from '@/components/login'
 import music from '@/components/music'
 // import musicList from '@/components/musicList'
 import musicDetails from '@/components/musicDetails'
+import article from '@/components/article'
+import articleDetails from '@/components/articleDetails'
 
 Vue.use(Router)
 
@@ -34,6 +36,16 @@ export default new Router({
       path:'/musicDetails',
       name:'musicDetails',
       component:musicDetails
+    },
+    {
+      path:'/article',
+      name:'article',
+      component:article
+    },
+    {
+      path:'/articleDetails',
+      name:'articleDetails',
+      component:articleDetails
     }
   ]
 })

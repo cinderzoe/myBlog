@@ -22,7 +22,29 @@ export default {
       'app-footer':Footer,
   },
   beforeCreate(){
-    
+    var _this=this;
+    if(window.localStorage.getItem('tokenid')){
+      this.$axios.post('/checktoken',{
+        headers:{
+            Authorization:window.localStorage.getItem('tokenid')
+          }
+      })
+      .then(res=>{
+        console.log(res)
+        if (res.data.status==200) {
+          _this.$store.commit('changeUserName', res.data.user)
+          console.log(res.data.user)
+          console.log(_this.$store.state.user_name)
+        }else if(res.data.status=202){
+          this.$router.replace('/login')
+        }
+      })
+      .catch(err=>{
+        this.$router.replace('/login')
+      });
+    }else{
+      this.$router.replace('/login')
+    }
   },
   computed:{
     // headerShow:function(){
@@ -49,6 +71,7 @@ export default {
     // }
   },
   created(){
+    console.log("有经过app.vue页面")
     this.headerShow=this.$store.state.header
   },
   methods:{
@@ -65,7 +88,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  padding: 1.5rem 0 0;
+  padding: 1.6rem 0 0;
   font-size: 0.4rem;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 </style>

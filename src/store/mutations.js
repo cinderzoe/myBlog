@@ -34,7 +34,12 @@ const mutations = {//第一个参数是vuex中的state,第二个参数是该方�
 	},
 	changeTemCurTime(state,val){  //用于进度条的移动，每次移动改变当前时间后，temCurrentTime都要设置回-1，不然当前时间会一直停留在此时刻
 		state.temCurrentTime=val
-	}
+	},
+	changeNavShow(state,val){
+		state.musicNav=val.music
+		state.userNav=val.user
+		state.articleNav=val.article
+	},
 
 
 }

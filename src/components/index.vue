@@ -12,35 +12,17 @@ export default {
       msg: '这里是主页面22'
     }
   },
-  created(){
-    var _this=this;
-    if(window.localStorage.getItem('tokenid')){
-      this.$axios.post('/checktoken',{
-        headers:{
-            Authorization:window.localStorage.getItem('tokenid')
-          }
-      })
-      .then(res=>{
-        console.log(res)
-        if (res.data.status==200) {
-          _this.$store.commit('changeUserName', res.data.user)
-          console.log(res.data.user)
-          console.log(_this.$store.state.user_name)
-        }else if(res.data.status=202){
-          this.$router.replace('/login')
-        }
-      })
-      .catch(err=>{
-        this.$router.replace('/login')
-      });
-    }else{
-      this.$router.replace('/login')
-    }
+  beforeCreate(){
+    
   },
   methods:{
     getInfo(){
     }
+  },
+  activated(){
+    this.$store.commit('changeNavShow',{music:false,user:true,article:false})
   }
+
 }
 </script>
 

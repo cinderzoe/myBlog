@@ -16,6 +16,10 @@ const state = {
     currentTime:0,//audio当前播放时间
     duration:0,//audio时长
     temCurrentTime:-1,//临时的当前时间，做判断
+    musicNav:false,//音乐导航显示
+    userNav:false,//用户名导航显示
+    articleNav:false,//文章导航显示
+
 }
 
 
