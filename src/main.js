@@ -13,8 +13,6 @@ import 'es6-promise/auto'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 import vueJsonp from 'vue-jsonp'
-import mavonEditor from 'mavon-editor'
-import 'mavon-editor/dist/css/index.css'
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
@@ -26,8 +24,6 @@ Vue.use(Toast)
 Vue.use(Slider)
 Vue.use(VueAwesomeSwiper)
 Vue.use(vueJsonp)
-Vue.use(mavonEditor)
-
 
 axios.defaults.baseURL = 'http://www.lazyzoe.cn:3000'
 
