@@ -1,23 +1,21 @@
 <template>
-	<div id="articleDetails">
-		<div class="comeBack" @click="$router.go(-1)"></div>
-		<div class="Details-layout">
-			<div class="wrap">
-				<div class="title clear">
-					<div class="leftRow fl">标题:</div>
-					<div class="rightRow fr">
-						<input type="text" placeholder="请输入标题" v-model="articleTitle">
-					</div>
-				</div>
-				<div class="content">
-					<div class="rightRow">
-						<textarea v-model="articleContent"></textarea>
-					</div>
-					<van-button type="info" size="large" @click="submit">发布</van-button>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div id="articleDetails">
+  	<div class="comeBack" @click="$router.go(-1)"></div>
+    <div class="wrap">
+      <div class="articleDetails-layout">
+        <div class="title">{{this.article.title}}</div>
+        <div class="person">
+          <div class="niname">{{this.article.niname}}</div>
+          <div class="time">{{this.article.time}}</div>
+        </div>
+        <div class="content">
+          <div class="contentText" v-html="this.article.content">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -25,27 +23,26 @@ export default {
   name: 'articleDetails',
   data () {
     return {
-     articleTitle:'',
-     articleContent:'',
+     id: 0,
+     article:'',
     }
   },
-  beforeCreate(){
-  	
-  },
   activated(){
-  	this.$store.commit('changeNavShow',{music:false,user:false,article:false})
+    this.id=this.$route.params.id;
+    this.$store.commit('changeNavShow',{music:false,user:false,article:false})
+    this.$axios.post('/articleDetailsGet',{
+      id:this.id
+    }).then(res=>{
+      console.log(res)
+      this.article=res.data[0]
+      console.log(this.article)
+    }).catch(err=>{
+      console.log(err)
+    })
   },
   methods:{
-  	submit(){
-  		console.log("title:"+this.articleTitle+"content:"+this.articleContent)
-  		this.$axios.post('/articleWrite',{
-  			articleTitle:this.articleTitle,
-  			articleContent:this.articleContent
-  		}).then(res=>{
-  			console.log(res)
-  		}).catch(err=>{
-  			console.log(err)
-  		})
+  	cedit(){
+  		console.log(this.value)
   	}
   }
 }
@@ -65,15 +62,11 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #333; 
 }
-#articleDetails{}
-.comeBack{position: fixed;top: 0;right: .5rem;height: 1.4rem;width: 1rem;background: url(../assets/back.png) center no-repeat;background-size: 100% auto;z-index: 100;}
-.Details-layout{line-height: 1.2rem;font-size: 0.45rem;}
-.title{padding-left: 1.5rem;position: relative;}
-.title .leftRow{position: absolute;left: 0;top: 0;}
-.rightRow{width: 100%;}
-.rightRow input,.rightRow textarea{width: 100%;border-radius: 5px;border: none;background-color: #fff;border: 1px solid #e2e2e2;padding:0 0.2rem;box-sizing: border-box;resize: none;}
-.content{padding-top: 0.5rem;}
-.content textarea{height: 65vh;padding-top: 0.2rem;padding-bottom: 0.2rem;line-height: 0.6rem;}
+#articleDetails{text-align: left;}
+#articleDetails .title{font-size: .6rem;font-weight: bold;padding: .2rem 0 .4rem;}
+#articleDetails .person{padding:.1rem 0;padding-left: 1.4rem;background: url(../assets/user.png) left center no-repeat;background-size: auto 1.1rem;background-color: #f0f0f0;color: #ed7961;font-size: .42rem;}
+#articleDetails .time{font-size: .4rem;color: #999;}
+#articleDetails .content{padding:.5rem 0;line-height: 1.8em;white-space: normal;}
 </style>

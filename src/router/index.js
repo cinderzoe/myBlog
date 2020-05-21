@@ -6,6 +6,7 @@ import music from '@/components/music'
 // import musicList from '@/components/musicList'
 import musicDetails from '@/components/musicDetails'
 import article from '@/components/article'
+import writeArticle from '@/components/writeArticle'
 import articleDetails from '@/components/articleDetails'
 
 Vue.use(Router)
@@ -43,7 +44,12 @@ export default new Router({
       component:article
     },
     {
-      path:'/articleDetails',
+      path:'/writeArticle',
+      name:'writeArticle',
+      component:writeArticle
+    },
+    {
+      path:'/articleDetails:id',
       name:'articleDetails',
       component:articleDetails
     }

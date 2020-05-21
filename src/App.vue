@@ -89,7 +89,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   padding: 1.6rem 0 0;
-  font-size: 0.4rem;
+  font-size: 0.45rem;
   min-height: 100vh;
   box-sizing: border-box;
 }

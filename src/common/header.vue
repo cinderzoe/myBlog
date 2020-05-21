@@ -22,7 +22,7 @@
       <!-- 用户登陆 -->
       <div id="userId" class="fr item-nav" v-if="userShow">{{username}}</div>
       <!-- 文章 -->
-      <div class="writeArticle item-nav fr" v-if="articleShow"><router-link to="/articleDetails">写文章</router-link></div>
+      <div class="writeArticle item-nav fr" v-if="articleShow"><router-link to="/writeArticle">写文章</router-link></div>
     </div>
 
   </div>
@@ -108,7 +108,7 @@ li {
 a {
   display: block;
 }
-#header{background:linear-gradient(to right, #ccb739, #2f907e, #c1625a);width: 100%;position: fixed;top: 0;left: 0;height: 1.4rem;font-size: 0.4rem;color: #fff;z-index: 99;}
+#header{background:linear-gradient(to right, #ccb739, #2f907e, #c1625a);width: 100%;position: fixed;top: 0;left: 0;height: 1.4rem;font-size: 0.4rem;color: #fff;z-index: 99999;}
 #userId{font-size: 0.5rem;color: #fff;line-height: 1.4rem;font-family: "黑体"}
 #closePopu{background-image: url(../assets/login_close.svg);background-size: 100%;background-repeat: no-repeat;background-position: center;position: absolute;right: 10px;top: 10px;width: 15px;height: 15px;cursor: pointer;}
 #user-name{color: #399c9c;font-size: 18px;} /*预留色#399c9c*/
