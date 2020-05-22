@@ -46,6 +46,10 @@ export default {
   }
   ,
   activated(){
+    this.$store.commit('headerShowOr',true)
+    if(this.$store.state.bgAudioUrl!==''){
+      this.$store.commit('musicPlayPause',true)
+    }
   	this.$store.commit('changeNavShow',{music:false,user:false,article:true})
   },
   methods:{

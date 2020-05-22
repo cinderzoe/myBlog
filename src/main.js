@@ -25,7 +25,6 @@ Vue.use(Slider)
 Vue.use(VueAwesomeSwiper)
 Vue.use(vueJsonp)
 
-
 axios.defaults.baseURL = 'http://www.lazyzoe.cn:3000'
 
 

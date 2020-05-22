@@ -39,6 +39,7 @@ export default {
     this.temEditor.create()
   },
   activated(){
+    this.$store.commit('musicPlayPause',false);
   	this.$store.commit('changeNavShow',{music:false,user:false,article:false})
   },
   methods:{
