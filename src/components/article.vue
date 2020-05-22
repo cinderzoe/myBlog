@@ -15,7 +15,6 @@
   </div>
 </template>
 <script>
-import E from "wangeditor";
 export default {
   data () {
     return {
@@ -34,10 +33,6 @@ export default {
       }
       
     }
-  },
-  mounted(){
-    this.temEditor = new E('#editorMenu', '#editor')
-    this.temEditor.create()
   },
   watch:{
     username(){
@@ -98,7 +93,7 @@ a {
 }
 .articleList{text-align: left;}
 .articleList pre{white-space: normal;}
-.title{font-size: .47rem;font-weight: bold;color: #333;line-height: 1.5em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.title{font-size: .47rem;font-weight: bold;color: #333;line-height: 1.5em;}
 .lists{padding:.2rem 0 .4rem;border-bottom: 1px solid #f0f0f0;margin-bottom: .3rem;}
 .content{margin: .1rem 0 .3rem;max-height: 2.97rem;overflow: hidden;}
 .author{padding-left: 1rem;background: url(../assets/user.png) left center no-repeat;background-size: auto 100%;line-height: 2em;}

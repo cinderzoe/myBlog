@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import E from "wangeditor";
+import Editor from "wangeditor";
 export default {
   name: 'writeArticle',
   data () {
@@ -35,7 +35,7 @@ export default {
     }
   },
   mounted(){
-    this.temEditor = new E('#editorMenu', '#editor')
+    this.temEditor = new Editor('#editorMenu', '#editor')
     this.temEditor.create()
   },
   activated(){
