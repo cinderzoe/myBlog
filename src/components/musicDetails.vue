@@ -50,7 +50,7 @@ export default {
       lyric:'', //原始获取到的歌词
       audioUrl:'', //MP4资源
       isPlay: false,
-      lastLyric:[], //处理过的时间和歌词 歌词这里要使用对象，不可使用数组
+      lastLyric:{}, //处理过的时间和歌词 歌词这里要使用对象，不可使用数组
       //currentTime:'', //音乐当前播放时间
       timeIndex:[], //当前歌词的序列号
       currentIndex:'',
@@ -108,15 +108,14 @@ export default {
         
       }
     },
-    // leftTime:{
-    //   get:function(){
-    //     return this.currentTime;
-    //   },
-    //   set:function(){
+    bgAudioUrl:{
+      get:function(){
+        return this.$store.state.bgAudioUrl;
+      },
+      set:function(){
         
-    //   }
-    // },
-    
+      }
+    }
   },
   watch:{
     currentTime(){
@@ -135,8 +134,9 @@ export default {
          this.lyricScroll(audioCurTime)
        }
     },
-    playBtn(){
-
+    bgAudioUrl(){
+      console.log("改变了歌曲")
+      this.mySwiper.init()
     }
   }
   ,
@@ -156,20 +156,21 @@ export default {
       // console.log(lyric)
       for(let i=0;i<lyric.length;i++){
         if(lyric[i].length!==0){  //避免单行空格造成的后续代码错误
-          let time=lyric[i].match(/\[(\S*)\]/ig)[0]
-          let lastLyric=lyric[i].replace(time,'')
-          let lastTime=time.slice(1,time.length-1)
-          //let gcTime=(Number(lastTime.match(/(\S*):/)[1]*60)+parseFloat(lastTime.match(/:(\S*)/)[1])).toFixed(2)
-          let gcTime=Math.floor(Number(lastTime.match(/(\S*):/)[1]*60)+parseFloat(lastTime.match(/:(\S*)/)[1]))
-          temTime.push(gcTime)
-          temLyric.push(lastLyric)
+          var pattern =new RegExp("\\[(.| )+?\\]","igm");
+          let time=lyric[i].match(pattern)
+          for(var key in time){
+            lyric[i]=lyric[i].replace(time.join().replace(',',''),'')  //去掉两个时间，把时间数组变为字符串，去掉“,”，然后去掉时间获取歌词
+            time[key]=time[key].slice(1,time[key].length-1)
+            time[key]=Math.floor(Number(time[key].match(/(\S*):/)[1]*60)+parseFloat(time[key].match(/:(\S*)/)[1]))
+            this.lastLyric[time[key]]=lyric[i]
+            this.timeIndex.push(time[key])
+          }
         }
       }
-      for(var key in temLyric){
-        temarr[temTime[key]]=temLyric[key]
-      }
-      this.lastLyric=temarr;
-      this.timeIndex=[...new Set(temTime)]
+      this.timeIndex.sort(function(a,b){
+          return a-b; 
+      })
+      console.log(this.lastLyric)
     },
     onChange(value) {
       var currentTime=Math.floor((value/100)*this.duration);
@@ -195,18 +196,18 @@ export default {
   },
   activated(){
     this.$store.commit('headerShowOr',false)
-    this.lastLyric='';
+    this.lastLyric={};
     this.audioId=this.$store.state.audioId;
     this.musicPic=this.$store.state.bgAudioPic;
-    this.audioUrl=this.$store.state.bgAudioUrl;
+    //this.audioUrl=this.$store.state.bgAudioUrl;
     this.musicName=this.$store.state.musicName;
     this.musicAuthor=this.$store.state.musicAuthor;
     this.currentTime=this.$store.state.currentTime;
     this.duration=this.$store.state.duration;
     this.headleTotalTime();
-    if(this.audioUrl){
-      var audio=document.getElementById('audio')
-    }
+    // if(this.audioUrl){
+    //   var audio=document.getElementById('audio')
+    // }
     this.$jsonp('https://music.163.com/api/song/media',{
       id:this.audioId
     }).then((res)=>{
