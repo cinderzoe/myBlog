@@ -2,7 +2,9 @@
   <div id="app">
     <!-- <app-header v-if="!(this.$route.path==='/login')"></app-header> -->
     <app-header v-if="headerShow"></app-header>
-    <keep-alive><router-view/></keep-alive>
+    <transition :name="transitionName">
+      <keep-alive><router-view/></keep-alive>
+    </transition>
     <app-footer></app-footer>
   </div>
 </template>
@@ -15,7 +17,7 @@ export default {
   data () {
     return {
       msg: 'Welcome to My blor',
-      transitionName:'slide'
+      transitionName:''
     }
   },
   components: {
@@ -72,6 +74,19 @@ export default {
   },
   activated(){
     console.log(this.transitionName)
+  },
+  watch: {
+    '$route' (to, from) {
+      if(to){
+        console.log("左")
+        console.log(to)
+        this.transitionName ='slide-left'
+      }else{
+        console.log('右')
+        this.transitionName ='slide-right'
+      }
+      //this.transitionName =''
+    }
   }
 
 }
@@ -94,4 +109,33 @@ export default {
   transition: all .8s ease;
   top: 0;
  }
+
+.slide-right-enter-active,
+.slide-right-leave-active,
+.slide-left-enter-active,
+.slide-left-leave-active {
+  will-change: transform;
+  transition: all 500ms;
+  position: absolute;
+}
+ 
+.slide-right-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+ 
+.slide-right-leave-active {
+  opacity: 0;
+  transform: translateX(100%);
+}
+ 
+.slide-left-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+ 
+.slide-left-leave-active {
+  opacity: 0;
+  transform: translateX(-100%);
+}
 </style>
