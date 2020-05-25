@@ -19,6 +19,7 @@ const state = {
     musicNav:false,//音乐导航显示
     userNav:false,//用户名导航显示
     articleNav:false,//文章导航显示
+    transitionName:''
 
 }
 

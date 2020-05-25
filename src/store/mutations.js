@@ -40,6 +40,9 @@ const mutations = {//第一个参数是vuex中的state,第二个参数是该方�
 		state.userNav=val.user
 		state.articleNav=val.article
 	},
+	changeTransition (state, transitionName) {
+  	  state.transitionName = transitionName
+  	}
 
 
 }

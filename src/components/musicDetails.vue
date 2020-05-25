@@ -236,7 +236,7 @@ li {
 a {
   color: #42b983;
 }
-#musicDetails{position: fixed;height: 100vh;width: 100%;top: 0;left: 0;box-sizing: border-box;}
+#musicDetails{position: fixed;height: 100vh;width: 100%;top: 0;left: 0;box-sizing: border-box;text-align: center;}
 .bg-box{position: fixed;width: 100%;height: 100%;top: 0;left: 0;background-size: cover;background-position: center;background-repeat: no-repeat;z-index: -1;}
 .lyric{background-color: rgba(0,0,0,0.7);height: 100vh;box-sizing: border-box;font-size: 0.48rem;line-height: 2em;color: #fff;overflow: hidden;top: 0;left: 0;box-sizing: border-box;padding:1.5rem 0.3rem 0;}
 .custom-button {width: 0.2rem;height: 0.2rem;color: #fff;font-size: 10px;line-height: 18px;text-align: center;background-color: #fff;border-radius: 100px;}

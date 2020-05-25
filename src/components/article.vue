@@ -95,7 +95,7 @@ li {
 a {
   color: #999;
 }
-.articleList{text-align: left;}
+.articleList{text-align: left;padding-top: .3rem;}
 .articleList pre{white-space: normal;}
 .title{font-size: .47rem;font-weight: bold;color: #333;line-height: 1.5em;}
 .lists{padding:.2rem 0 .4rem;border-bottom: 1px solid #f0f0f0;margin-bottom: .3rem;}

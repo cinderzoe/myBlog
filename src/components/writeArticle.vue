@@ -23,6 +23,7 @@
 
 <script>
 import Editor from "wangeditor";
+import { Dialog } from 'vant';
 export default {
   name: 'writeArticle',
   data () {
@@ -32,6 +33,7 @@ export default {
      editor: null,
      editorContent: '',
      temEditor:null,
+     hasSubmit:false,
     }
   },
   mounted(){
@@ -64,6 +66,7 @@ export default {
         }).then(res=>{
          console.log(res)
          if(res.status=='200'){
+          this.hasSubmit=true
           this.$router.replace('/article')
          }
         }).catch(err=>{
@@ -80,7 +83,25 @@ export default {
     addZero(val){
       return val<10?'0'+val:val
     }
-  }
+  },
+  // beforeRouteLeave (to, from , next) {
+  //  if (this.hasSubmit) {
+  //    next(); // 允许离开或者可以跳到别的路由 上面讲过了
+  //   } 
+  //   else {
+  //    //next(false); // 取消离开
+  //   Dialog.confirm({
+  //     title: '提示',
+  //     message: '文章未保存，是否离开',
+  //   })
+  //   .then(() => {
+  //     next()
+  //   })
+  //   .catch(() => {
+  //     // on cancel
+  //   });
+  //   }
+  // }
 }
 </script>
 
@@ -97,7 +118,7 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
-#writeArticle{text-align: left;}
+#writeArticle{text-align: left;padding-top: .3rem;}
 #writeArticle .Details-layout{line-height: 1.2rem;font-size: 0.45rem;}
 #writeArticle .title{padding-left: 1.5rem;position: relative;}
 #writeArticle .title .leftRow{position: absolute;left: 0;top: 0;}
@@ -107,5 +128,5 @@ li {
 #writeArticle .submit{margin-top: 0.3rem;}
 #writeArticle .w-e-toolbar{flex-wrap:wrap!important;}
 #writeArticle .w-e-toolbar .w-e-menu{max-width: 10%;display: inline-block;float: left;padding:0 .25rem;line-height: .8rem;}
-#writeArticle #editor{height:60vh;border: 1px solid #e2e2e2;border-radius: 5px;}
+#writeArticle #editor{height:60vh;border: 1px solid #e2e2e2;border-radius: 5px;z-index: 5!important;}
 </style>

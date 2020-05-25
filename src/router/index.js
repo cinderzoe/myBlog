@@ -8,6 +8,8 @@ import musicDetails from '@/components/musicDetails'
 import article from '@/components/article'
 import writeArticle from '@/components/writeArticle'
 import articleDetails from '@/components/articleDetails'
+import user from '@/components/user'
+import userCredit from '@/components/userCredit'
 
 Vue.use(Router)
 
@@ -15,18 +17,15 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
       component: index
     },
     {
       path: '/login',
-      name: 'login',
       component: login
     },
     {
       path:'/music',
-      name:'music',
-      component:music
+      component:music,
     },
     // {
     //   path:'/musicList',
@@ -35,23 +34,27 @@ export default new Router({
     // },
     {
       path:'/musicDetails',
-      name:'musicDetails',
       component:musicDetails
     },
     {
       path:'/article',
-      name:'article',
       component:article
     },
     {
       path:'/writeArticle',
-      name:'writeArticle',
       component:writeArticle
     },
     {
       path:'/articleDetails:id',
-      name:'articleDetails',
       component:articleDetails
+    },
+    {
+      path:'/user',
+      component:user
+    },
+    {
+      path:'/userCredit',
+      component:userCredit
     }
   ]
 })

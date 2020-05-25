@@ -3,16 +3,14 @@
     <div class="wrap">
       <transition name="menufade">
         <div id="menu" @click="toggleNav" :class="{'active':menuToggle}">
-          <!-- <span class="sp1"></span>
-          <span class="sp2"></span>
-          <span class="sp3"></span> -->
         </div>
       </transition>
       <transition name="navfade">
         <div id="nav" v-if="navShow">
           <div @click="toggleNav"><router-link to="/">首页</router-link></div>
-          <div @click="toggleNav"><router-link to="/music">音乐</router-link></div>
           <div @click="toggleNav"><router-link to="/article">文章</router-link></div>
+          <div @click="toggleNav"><router-link to="/music">音乐</router-link></div>
+          <div @click="toggleNav"><router-link to="/user">个人中心</router-link></div>
         </div>
       </transition>
       <!-- 音乐导航 -->
@@ -20,7 +18,7 @@
         <div class="music-router">热歌推荐</div>
       </div>
       <!-- 用户登陆 -->
-      <div id="userId" class="fr item-nav" v-if="userShow">{{username}}</div>
+      <div id="userId" class="fr item-nav" v-if="userShow"><router-link to="/user">{{username}}</router-link></div>
       <!-- 文章 -->
       <div class="writeArticle item-nav fr" v-if="articleShow"><router-link to="/writeArticle">写文章</router-link></div>
     </div>
@@ -107,20 +105,14 @@ li {
 }
 a {
   display: block;
+  color: #fff;
 }
-#header{background:linear-gradient(to right, #ccb739, #2f907e, #c1625a);width: 100%;position: fixed;top: 0;left: 0;height: 1.4rem;font-size: 0.4rem;color: #fff;z-index: 99999;}
+#header{background:linear-gradient(to right, #ccb739, #2f907e, #c1625a);width: 100%;position: fixed;top: 0;left: 0;height: 1.4rem;font-size: 0.4rem;color: #fff;z-index: 99999;text-align: center;}
 #userId{font-size: 0.5rem;color: #fff;line-height: 1.4rem;font-family: "黑体"}
 #closePopu{background-image: url(../assets/login_close.svg);background-size: 100%;background-repeat: no-repeat;background-position: center;position: absolute;right: 10px;top: 10px;width: 15px;height: 15px;cursor: pointer;}
 #user-name{color: #399c9c;font-size: 18px;} /*预留色#399c9c*/
 #menu{position: absolute;top: 0;height: 0.8rem;width: 1rem;top: 0.3rem;cursor: pointer;z-index: 2;transition: 0.3s;background: url(../assets/menu.png) center no-repeat;background-size: 100% auto;}
 #menu.active{transform: translateX(2.5rem);background-image: url(../assets/close.png);}
-/*#menu.active span.sp1{transform:rotate(43deg);}
-#menu.active span.sp2{opacity: 0;}
-#menu.active span.sp3{transform:rotate(-43deg);}*/
-/*#menu span{width:1rem;height: 0.1rem;background-color: #fff;display: block;border-radius: 0.05rem;position: absolute;left: 0;transform-origin: left center;}
-#menu span.sp1{top: 0;}
-#menu span.sp2{top: 50%;margin-top: -0.04rem;}
-#menu span.sp3{bottom: 0;}*/
 #nav{position: fixed;width: 4rem;background-color: rgba(0,0,0,0.6);top: 0;left: 0;height: 100vh;color: #fff;padding-top: 1.3rem;box-sizing: border-box;}
 #nav a{color: #fff;padding:0.25rem 0 0.25rem 0.5rem;text-align: left;display: block;font-size: 0.5rem;}
 .navfade-enter-active, .navfade-leave-active {

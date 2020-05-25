@@ -25,6 +25,7 @@ export default {
     return {
      id: 0,
      article:'',
+     
     }
   },
   activated(){
@@ -44,7 +45,8 @@ export default {
   	cedit(){
   		console.log(this.value)
   	}
-  }
+  },
+  
 }
 </script>
 

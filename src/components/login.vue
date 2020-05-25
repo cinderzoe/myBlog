@@ -166,7 +166,7 @@ li {
 a {
   color: #42b983;
 }
-.app-login{height: 70vh;display: flex;flex-direction: column;justify-content: center;}
+.app-login{height: 70vh;display: flex;flex-direction: column;justify-content: center;text-align: center;}
 .register{color: #999;font-size: 0.43rem;margin-top: 0.5rem;text-decoration: underline;cursor: pointer;}
 .register:hover{color: #333;}
 .login-tit{font-size: 0.6rem;margin-bottom: 1rem;}

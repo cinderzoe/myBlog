@@ -15,6 +15,7 @@ export default {
   data () {
     return {
       msg: 'Welcome to My blor',
+      transitionName:'slide'
     }
   },
   components: {
@@ -61,14 +62,6 @@ export default {
         
       }
     },
-    // footerShow:{
-    //   get:function(){
-    //     return this.$store.state.footer;
-    //   },
-    //   set:function(){
-        
-    //   }
-    // }
   },
   created(){
     console.log("有经过app.vue页面")
@@ -76,6 +69,9 @@ export default {
   },
   methods:{
     
+  },
+  activated(){
+    console.log(this.transitionName)
   }
 
 }
@@ -86,11 +82,16 @@ export default {
   font-family: '黑体','Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  padding: 1.6rem 0 0;
+  padding: 1.4rem 0 0;
   font-size: 0.45rem;
   min-height: 100vh;
   box-sizing: border-box;
 }
+.views {
+  position: absolute;
+  width: 100%;
+  transition: all .8s ease;
+  top: 0;
+ }
 </style>

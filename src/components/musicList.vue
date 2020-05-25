@@ -120,8 +120,9 @@ li {
 a {
   color: #42b983;
 }
+.musicList{padding-top: .3rem;}
 .lists{position: relative;}
-.list-cont{margin: 0.3rem 0;text-align: left;background: url(../assets/music-pause.png) 95% center no-repeat;background-size: 0.8rem 0.8rem;}
+.list-cont{padding: 0.2rem 0;text-align: left;background: url(../assets/music-pause.png) 95% center no-repeat;background-size: 0.8rem 0.8rem;}
 .lists.active .list-cont{background-image: url(../assets/music-play.png);}
 .list-cont .pic{width: 1.4rem;height: 1.4rem;background-repeat: no-repeat;background-position: center;background-size: 100% auto;border-radius: 0.1rem;}
 .list-cont .info{padding-left: 0.15rem;}

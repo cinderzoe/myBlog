@@ -8,11 +8,12 @@ import './assets/public.css'
 import axios from '../node_modules/axios'
 import store from './store/store';
 import 'lib-flexible'
-import {Button,Form,Field,Toast,Slider} from 'vant'
+import {Button,Form,Field,Toast,Slider,ActionSheet} from 'vant'
 import 'es6-promise/auto'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 import vueJsonp from 'vue-jsonp'
+
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
@@ -22,11 +23,11 @@ Vue.use(Field)
 Vue.use(Form)
 Vue.use(Toast)
 Vue.use(Slider)
+Vue.use(ActionSheet)
 Vue.use(VueAwesomeSwiper)
 Vue.use(vueJsonp)
 
 axios.defaults.baseURL = 'http://www.lazyzoe.cn:3000'
-
 
 new Vue({
   el: '#app',
