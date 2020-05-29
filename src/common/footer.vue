@@ -1,6 +1,7 @@
 <template>
   <div id="footer">
     <div class="music-float" v-if="audioShow" @click="toMusicDetail">
+      <router-link to='./music/musicDetails'>
        <div class="music-inner">
          <img :src="musicPic" :class="playBtn?'musicRotate':''">
          <!-- <audio id="audio" :src="audioUrl"></audio> -->
@@ -9,6 +10,7 @@
             <img src="../assets/pausein.png" v-else>
          </div>
        </div>
+      </router-link>
     </div>
     <audio :src="audioUrl" id="audio" ref="audio" @error="audioerr" @timeupdate='updateTime' @canplay="getDuration"></audio>
   </div>
@@ -66,7 +68,7 @@ export default {
   ,
   methods:{
     toMusicDetail(){
-      this.$router.push('/musicDetails')
+      //this.$router.push('/musicDetails')
       this.$store.commit('musicPlayPause',false)
     },
     audioerr(e){

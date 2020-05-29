@@ -3,7 +3,7 @@
     <!-- <app-header v-if="!(this.$route.path==='/login')"></app-header> -->
     <app-header v-if="headerShow"></app-header>
     <transition :name="transitionName">
-      <keep-alive><router-view/></keep-alive>
+      <router-view/>
     </transition>
     <app-footer></app-footer>
   </div>
@@ -36,8 +36,6 @@ export default {
         console.log(res)
         if (res.data.status==200) {
           _this.$store.commit('changeUserName', res.data.user)
-          console.log(res.data.user)
-          console.log(_this.$store.state.user_name)
         }else if(res.data.status=202){
           this.$router.replace('/login')
         }
@@ -75,19 +73,13 @@ export default {
   activated(){
     console.log(this.transitionName)
   },
-  watch: {
-    '$route' (to, from) {
-      if(to){
-        console.log("左")
-        console.log(to)
-        this.transitionName ='slide-left'
-      }else{
-        console.log('右')
-        this.transitionName ='slide-right'
-      }
-      //this.transitionName =''
-    }
-  }
+  // watch: {
+  //   '$route' (to, from) {
+  //   const toDepth = to.meta.index
+  //   const fromDepth = from.meta.index
+  //   this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+  //   }
+  // }
 
 }
 </script>
@@ -109,33 +101,35 @@ export default {
   transition: all .8s ease;
   top: 0;
  }
-
 .slide-right-enter-active,
 .slide-right-leave-active,
 .slide-left-enter-active,
 .slide-left-leave-active {
   will-change: transform;
   transition: all 500ms;
-  position: absolute;
+  top: 0px;
+  /* position: absolute; */
+  backface-visibility: hidden;
+  perspective: 1000;
 }
  
 .slide-right-enter {
-  opacity: 0;
+  opacity: 0; 
   transform: translateX(-100%);
 }
  
 .slide-right-leave-active {
-  opacity: 0;
+  opacity: 0; 
   transform: translateX(100%);
 }
  
 .slide-left-enter {
-  opacity: 0;
+  opacity: 0; 
   transform: translateX(100%);
 }
  
 .slide-left-leave-active {
-  opacity: 0;
+  opacity: 0; 
   transform: translateX(-100%);
 }
 </style>

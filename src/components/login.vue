@@ -1,6 +1,6 @@
 <template>
   <div class="app-login">
-    <van-form >
+    <van-form>
       <div class="login-tit">{{loginStatus?'登陆':'注册'}}</div>
 	  <van-field v-model="username" name="用户名" left-icon="contact" label="用户名" placeholder="用户名" />
 	  <van-field v-if="!loginStatus" v-model="niname" name="昵称" left-icon="smile-o" label="昵称" placeholder="昵称" />
@@ -33,6 +33,9 @@ export default {
     this.$store.commit('headerShowOr',false)
   },
   created:function () {
+  	if(this.$store.state.user_name!==''){
+  		this.$router.replace('/')
+  	}
   	this.$emit('header', false);
     console.log(this.$store.state.header)
   },

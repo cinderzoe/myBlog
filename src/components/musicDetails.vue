@@ -23,7 +23,7 @@
          <img src="../assets/pausein.png" v-else>
       </div>
       <div class="musicTime">
-        <van-slider v-model="audioDuration" active-color="rgba(0, 212, 124, 0.3)" @change="onChange" class="audioSlider" ref="slider">
+        <van-slider name='slider' v-model="audioDuration" active-color="#fff" @change="onChange" class="audioSlider" ref="slider">
           <template #button>
             <div class="custom-button"></div>
           </template>
@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import { Dialog } from 'vant';
 export default {
   name: 'musicDetails',
   data () {
@@ -66,30 +65,46 @@ export default {
       musicName:'',
       musicAuthor:'',
       audioDuration:100,
+      slider:'0',
       duration:0,//audio时长
       leftTime:"00:00",//显示的当前时间
       rightTime:"00:00"//显示的总时间
     }
   },
-  beforeCreate(){
-    this.$store.commit('headerShowOr',false)
-  },
-  beforeMount(){
-
+  mounted(){
+    
   },
   created(){
-    this.$nextTick(() => {
-      if(!this.audioId){
-        Dialog.alert({
-          message: '音乐资源获取失败，返回音乐列表',
-        }).then(() => {
-          this.$router.replace('/music')
-        });
-      }else{
-        var slide=document.getElementsByClassName('van-slider__bar')[0]
-        slide.style.width=0;
-      }
+    this.lastLyric={};
+    this.audioId=this.$store.state.audioId;
+    this.musicPic=this.$store.state.bgAudioPic;
+    //this.audioUrl=this.$store.state.bgAudioUrl;
+    this.musicName=this.$store.state.musicName;
+    this.musicAuthor=this.$store.state.musicAuthor;
+    this.currentTime=this.$store.state.currentTime;
+    this.duration=this.$store.state.duration;
+    this.headleTotalTime();
+    this.$jsonp('https://music.163.com/api/song/media',{
+      id:this.audioId
+    }).then((res)=>{
+    　this.lyric=res.lyric
+      this.cutLyric()
+    }).catch(err=>{
+      console.log(err)
     })
+    // this.$nextTick(() => {
+    //   console.log(this.audioId)
+    //   if(!this.audioId){
+    //     this.$dialog.alert({
+    //       message: '音乐资源获取失败，返回音乐列表',
+    //     }).then(() => {
+    //       this.$router.replace('/music')
+    //     });
+    //   }else{
+    //     var slide=document.getElementsByClassName('van-slider__bar')[0]
+    //     slide.style.width=0;
+    //   }
+    // })
   },
   computed:{
     currentTime:{
@@ -135,7 +150,6 @@ export default {
        }
     },
     bgAudioUrl(){
-      console.log("改变了歌曲")
       this.mySwiper.init()
     }
   }
@@ -194,28 +208,9 @@ export default {
       this.playBtn=this.$store.state.musicPlayBtn;
     }
   },
-  activated(){
-    this.$store.commit('headerShowOr',false)
-    this.lastLyric={};
-    this.audioId=this.$store.state.audioId;
-    this.musicPic=this.$store.state.bgAudioPic;
-    //this.audioUrl=this.$store.state.bgAudioUrl;
-    this.musicName=this.$store.state.musicName;
-    this.musicAuthor=this.$store.state.musicAuthor;
-    this.currentTime=this.$store.state.currentTime;
-    this.duration=this.$store.state.duration;
-    this.headleTotalTime();
-    // if(this.audioUrl){
-    //   var audio=document.getElementById('audio')
-    // }
-    this.$jsonp('https://music.163.com/api/song/media',{
-      id:this.audioId
-    }).then((res)=>{
-    　this.lyric=res.lyric
-      this.cutLyric()
-    }).catch(err=>{
-      console.log(err)
-    })
+  beforeRouteLeave(to,from,next){
+    next()
+    this.$store.commit('musicPlayPause',true)
   }
 }
 </script>
@@ -236,10 +231,10 @@ li {
 a {
   color: #42b983;
 }
-#musicDetails{position: fixed;height: 100vh;width: 100%;top: 0;left: 0;box-sizing: border-box;text-align: center;}
+#musicDetails{position: fixed;height: 100vh;width: 100%;top: 0;left: 0;box-sizing: border-box;text-align: center;z-index: 99999;}
 .bg-box{position: fixed;width: 100%;height: 100%;top: 0;left: 0;background-size: cover;background-position: center;background-repeat: no-repeat;z-index: -1;}
 .lyric{background-color: rgba(0,0,0,0.7);height: 100vh;box-sizing: border-box;font-size: 0.48rem;line-height: 2em;color: #fff;overflow: hidden;top: 0;left: 0;box-sizing: border-box;padding:1.5rem 0.3rem 0;}
-.custom-button {width: 0.2rem;height: 0.2rem;color: #fff;font-size: 10px;line-height: 18px;text-align: center;background-color: #fff;border-radius: 100px;}
+.custom-button {width: 0.2rem;height: 0.2rem;color: #fff;font-size: 10px;line-height: 18px;text-align: center;background-color: #fff;border-radius: 50%;}
 .lyric .swiper-container{height: 80%;margin-top: 0.5rem;color: rgba(255,255,255,0.6)}
 .swiper-slide.on{color: #fff;}
 .backBtn{position: fixed;top: 0;left: 2%;z-index: 4;background: url(../assets/musicBak.png) left center no-repeat;background-size:auto 0.6rem;padding-left: 1rem;}

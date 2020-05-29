@@ -1,6 +1,8 @@
 // 初始化状态
 const state = {
     user_name: '',
+    user_headPic:'http://www.lazyzoe.cn/myblog/images/user.jpg',
+    user_bgPic:'http://www.lazyzoe.cn/myblog/images/selfbg.jpg',
     isLogin:false,
     currentUser:null,
     token:'',
@@ -19,7 +21,8 @@ const state = {
     musicNav:false,//音乐导航显示
     userNav:false,//用户名导航显示
     articleNav:false,//文章导航显示
-    transitionName:''
+    niname:'', //昵称
+    introduction:'', //简介
 
 }
 

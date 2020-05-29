@@ -29,7 +29,10 @@ export default {
     }
   },
   created(){
-
+    if(this.musicIndex!==-1){
+      this.$store.commit('musicPlayPause',true);
+      
+    }
   },
   beforeMount(){
   	this.$axios.post('http://hellojinx.cn:4000/top/list?idx=0')
@@ -93,13 +96,6 @@ export default {
       }
     }
   },
-  activated(){
-    this.$store.commit('headerShowOr',true)
-    if(this.musicIndex!==-1){
-      this.$store.commit('musicPlayPause',true);
-      
-    }
-  }
   
 }
 </script>

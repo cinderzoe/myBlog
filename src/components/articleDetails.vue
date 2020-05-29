@@ -28,7 +28,7 @@ export default {
      
     }
   },
-  activated(){
+  created(){
     this.id=this.$route.params.id;
     this.$store.commit('changeNavShow',{music:false,user:false,article:false})
     this.$axios.post('/articleDetailsGet',{

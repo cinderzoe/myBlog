@@ -41,11 +41,8 @@ export default {
       }
     }
   },
-  created(){
+  mounted(){
     this.getArticle()
-  }
-  ,
-  activated(){
     this.$store.commit('headerShowOr',true)
     if(this.$store.state.bgAudioUrl!==''){
       this.$store.commit('musicPlayPause',true)

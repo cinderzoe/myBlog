@@ -13,13 +13,13 @@ export default {
     }
   },
   beforeCreate(){
-    
+    this.$store.commit('headerShowOr',true)
   },
   methods:{
     getInfo(){
     }
   },
-  activated(){
+  mounted(){
     this.$store.commit('changeNavShow',{music:false,user:true,article:false})
   }
 

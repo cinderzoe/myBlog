@@ -3,6 +3,12 @@ const mutations = {//第一个参数是vuex中的state,第二个参数是该方�
 	changeUserName(state,val){   //修改用户名
 		state.user_name=val; 
 	},
+	changeUserHeadPic(state,val){
+		state.user_headPic=val
+	},
+	changeUserBgPic(state,val){
+		state.user_bgPic=val
+	},
 	setAudioPic(state,val){
 		state.bgAudioPic=val.picUrl;
 		state.bgAudioUrl=`https://music.163.com/song/media/outer/url?id=${val.musicId}.mp3`;
@@ -40,8 +46,11 @@ const mutations = {//第一个参数是vuex中的state,第二个参数是该方�
 		state.userNav=val.user
 		state.articleNav=val.article
 	},
-	changeTransition (state, transitionName) {
-  	  state.transitionName = transitionName
+  	changeNiname(state,val){
+  		state.niname=val
+  	},
+  	changeIntroduction(state,val){
+  		state.introduction=val
   	}
 
 

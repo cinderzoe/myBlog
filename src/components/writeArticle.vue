@@ -1,6 +1,6 @@
 <template>
 	<div id="writeArticle">
-		<div class="comeBack" @click="$router.go(-1)"></div>
+		<div class="comeBack" @click="$router.replace('/article')"></div>
 		<div class="Details-layout">
 			<div class="wrap">
 				<div class="title clear">
@@ -23,7 +23,6 @@
 
 <script>
 import Editor from "wangeditor";
-import { Dialog } from 'vant';
 export default {
   name: 'writeArticle',
   data () {
@@ -40,7 +39,7 @@ export default {
     this.temEditor = new Editor('#editorMenu', '#editor')
     this.temEditor.create()
   },
-  activated(){
+  created(){
     this.$store.commit('musicPlayPause',false);
   	this.$store.commit('changeNavShow',{music:false,user:false,article:false})
   },
@@ -84,24 +83,24 @@ export default {
       return val<10?'0'+val:val
     }
   },
-  // beforeRouteLeave (to, from , next) {
-  //  if (this.hasSubmit) {
-  //    next(); // 允许离开或者可以跳到别的路由 上面讲过了
-  //   } 
-  //   else {
-  //    //next(false); // 取消离开
-  //   Dialog.confirm({
-  //     title: '提示',
-  //     message: '文章未保存，是否离开',
-  //   })
-  //   .then(() => {
-  //     next()
-  //   })
-  //   .catch(() => {
-  //     // on cancel
-  //   });
-  //   }
-  // }
+  beforeRouteLeave (to, from , next) {
+   if (this.hasSubmit||this.temEditor.txt.text()=='') {
+     next(); // 允许离开或者可以跳到别的路由 上面讲过了
+    } 
+    else {
+     //next(false); // 取消离开
+    this.$dialog.confirm({
+      title: '提示',
+      message: '文章未保存，是否离开',
+    })
+    .then(() => {
+      next()
+    })
+    .catch(() => {
+      // on cancel
+    });
+    }
+  }
 }
 </script>
 

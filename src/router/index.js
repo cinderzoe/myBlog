@@ -9,7 +9,8 @@ import article from '@/components/article'
 import writeArticle from '@/components/writeArticle'
 import articleDetails from '@/components/articleDetails'
 import user from '@/components/user'
-import userCredit from '@/components/userCredit'
+//import userCredit from '@/components/userCredit'
+import userCreditIn from '@/components/userCreditIn'
 
 Vue.use(Router)
 
@@ -17,29 +18,68 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: index
+      component: index,
+      meta:{
+        index:1
+      }
     },
     {
       path: '/login',
       component: login
     },
     {
+      path:'/article',
+      component:article,
+      meta:{
+        index:2
+      }
+    },
+    {
       path:'/music',
       component:music,
+      meta:{
+        index:3
+      },
+      children:[
+        {
+          path:'musicDetails',
+          component:musicDetails
+        },
+      ]
+    },
+    {
+      path:'/user',
+      component:user,
+      meta:{
+        index:4
+      },
+      children:[
+        {
+          path:'userCreditIn',
+          component:userCreditIn
+        }
+      ]
+      // children:[
+      // {
+      //   path:'user',
+      //   component:user
+      // },
+      // {
+      //   path:'userCredit',
+      //   component:userCredit
+      // } 
+      // ]
     },
     // {
-    //   path:'/musicList',
-    //   name:'musicList',
-    //   component:musicList
-    // },
-    {
-      path:'/musicDetails',
-      component:musicDetails
-    },
-    {
-      path:'/article',
-      component:article
-    },
+    //   path:'/userCredit',
+    //   component:userCredit,
+    //   children:[
+    //     {
+    //       path:'userCreditIn',
+    //       component:userCreditIn
+    //     }
+    //   ]
+    // }, 
     {
       path:'/writeArticle',
       component:writeArticle
@@ -48,13 +88,6 @@ export default new Router({
       path:'/articleDetails:id',
       component:articleDetails
     },
-    {
-      path:'/user',
-      component:user
-    },
-    {
-      path:'/userCredit',
-      component:userCredit
-    }
+    
   ]
 })

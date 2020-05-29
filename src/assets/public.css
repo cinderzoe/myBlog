@@ -16,4 +16,5 @@ body.on{padding-top:114px;}
 .wrap{margin:0 auto;padding: 0 0.25rem;}
 .fl,li{float:left}
 .fr{float:right}
+.lay-out{padding-top: 1.4rem;}
 .comeBack{position: fixed;top: 0;right: .5rem;height: 1.4rem;width: 1rem;background: url(../assets/back.png) center no-repeat;background-size: 100% auto;z-index: 99999;}
