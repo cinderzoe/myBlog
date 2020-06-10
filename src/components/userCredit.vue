@@ -38,8 +38,31 @@ export default {
   	backUser(){
   		this.$emit('showCredit',true)
   	},
-    getPic(){
-
+    getPic(event){
+      let reader = new FileReader();
+      let img = event.target.files[0];
+      if(img){
+        let type = img.type;
+        let size = img.size;
+        if (this.imgData.accept.indexOf(type) == -1) {
+          alert('请选择我们支持的图片格式！');
+          return false;
+        }
+        if (size > 3145728) {
+          alert('请选择3M以内的图片！');
+          return false;
+        }
+        var uri = ''
+        let form = new FormData();
+        form.append('file', img, img.name);
+        //接口部分
+        this.$axios.post("/updateHeadPic", form).then(response => {
+          console.log(res)
+        }).catch(function(err) {
+          console.log(err);
+        });
+      }
+      
     },
     creditText(e){
       this.$emit('pushMsg',e)

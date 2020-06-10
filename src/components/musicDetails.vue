@@ -10,7 +10,7 @@
         <div class="swiper-container" v-swiper:mySwiper="swiperOption" ref="mySwiper">
           <div class="swiper-wrapper">
             <div :class="currentIndex==index?'on':''"  v-for="(value,key,index) in lastLyric" ref="active" data-index="index" class="swiper-slide">
-              {{value}}
+              <p>{{value}}</p>
             </div>
           </div>
           <div class="swiper-pagination"></div>
@@ -64,7 +64,7 @@ export default {
       },
       musicName:'',
       musicAuthor:'',
-      audioDuration:100,
+      audioDuration:0,
       slider:'0',
       duration:0,//audio时长
       leftTime:"00:00",//显示的当前时间
@@ -92,19 +92,6 @@ export default {
     }).catch(err=>{
       console.log(err)
     })
-    // this.$nextTick(() => {
-    //   console.log(this.audioId)
-    //   if(!this.audioId){
-    //     this.$dialog.alert({
-    //       message: '音乐资源获取失败，返回音乐列表',
-    //     }).then(() => {
-    //       this.$router.replace('/music')
-    //     });
-    //   }else{
-    //     var slide=document.getElementsByClassName('van-slider__bar')[0]
-    //     slide.style.width=0;
-    //   }
-    // })
   },
   computed:{
     currentTime:{
@@ -139,12 +126,13 @@ export default {
        let timeObj = this.lastLyric[audioCurTime]
        var percent;
        var duration=this.duration
-       percent=(audioCurTime/duration)*100+"%"
+       percent=(audioCurTime/duration)*100
        //console.log(percent)
-       if(document.getElementsByClassName('van-slider__bar')[0]){
-        var slide=document.getElementsByClassName('van-slider__bar')[0]
-        slide.style.width=percent
-       }
+       // if(document.getElementsByClassName('van-slider__bar')[0]){
+       //  var slide=document.getElementsByClassName('van-slider__bar')[0]
+       //  slide.style.width=percent
+       // }
+       this.audioDuration=percent
        if (timeObj != undefined) { //检测歌词才滚动
          this.lyricScroll(audioCurTime)
        }
@@ -233,17 +221,18 @@ a {
 }
 #musicDetails{position: fixed;height: 100vh;width: 100%;top: 0;left: 0;box-sizing: border-box;text-align: center;z-index: 99999;}
 .bg-box{position: fixed;width: 100%;height: 100%;top: 0;left: 0;background-size: cover;background-position: center;background-repeat: no-repeat;z-index: -1;}
-.lyric{background-color: rgba(0,0,0,0.7);height: 100vh;box-sizing: border-box;font-size: 0.48rem;line-height: 2em;color: #fff;overflow: hidden;top: 0;left: 0;box-sizing: border-box;padding:1.5rem 0.3rem 0;}
+.lyric{background-color: rgba(0,0,0,0.7);height: 100vh;box-sizing: border-box;font-size: 0.4rem;line-height: 2em;color: #fff;overflow: hidden;top: 0;left: 0;box-sizing: border-box;padding:1.5rem 0 0;}
 .custom-button {width: 0.2rem;height: 0.2rem;color: #fff;font-size: 10px;line-height: 18px;text-align: center;background-color: #fff;border-radius: 50%;}
 .lyric .swiper-container{height: 80%;margin-top: 0.5rem;color: rgba(255,255,255,0.6)}
 .swiper-slide.on{color: #fff;}
+.swiper-slide{height: auto!important;}
 .backBtn{position: fixed;top: 0;left: 2%;z-index: 4;background: url(../assets/musicBak.png) left center no-repeat;background-size:auto 0.6rem;padding-left: 1rem;}
 .backBtn .name{line-height: 1.2em;padding: 0.2rem 0;font-size: 0.45rem;text-align: left;}
 .backBtn .author{font-size: 0.3rem;text-align: left;color: rgba(255,255,255,0.7);line-height: 1.2em;}
-.control-slide{position: fixed;bottom: 1rem;width: 90%;left: 0;right: 0;margin: 0 auto;z-index: 9;padding-left: 2rem;box-sizing: border-box;}
+.control-slide{position: fixed;bottom: 1rem;width: 90%;left: 0;right: 0;margin: 0 auto;z-index: 9;padding-left: 1.5rem;box-sizing: border-box;}
 .audioSlider{width: 100%;}
 .musicTime{position: relative;padding:0 1.2rem;box-sizing: border-box;}
-.audioTime{position: absolute;bottom: 0.5rem;left: 0;right: 0;margin: 0 auto;bottom:0;color: #fff;margin-bottom: -0.2rem;z-index: -1;}
+.audioTime{position: absolute;bottom: 0.5rem;font-size: 0.4rem;left: 0;right: 0;margin: 0 auto;bottom:0;color: #fff;margin-bottom: -0.2rem;z-index: -1;}
 .audioTime .current{float: left;}
 .audioTime .total{float: right;}
 .play-btn{position: absolute;left: 0;top: 0;margin-top: -0.5rem;width: 1rem;height: 1rem;border-radius: 50%;}
