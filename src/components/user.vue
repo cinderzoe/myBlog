@@ -59,6 +59,7 @@ export default {
         console.log(res)
         this.$store.commit('changeNiname',res.data[0].niname)
         this.$store.commit('changeIntroduction',res.data[0].introduction)
+        this.$store.commit('changeUserHeadPic',res.data[0].headImg)
       }).catch(err=>{
         console.log(err)
       })

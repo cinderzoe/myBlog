@@ -32,7 +32,6 @@ export default {
   name: 'userInfo',
   data () {
     return {
-     	headPicUrl:'',
       personalBg:'',
       show:false,
     }
@@ -61,10 +60,17 @@ export default {
       set:function(){
 
       }
+    },
+    headPicUrl:{
+      get:function(){
+        return this.$store.state.user_headPic
+      },
+      set:function(){
+
+      }
     }
   },
   created(){
-    this.headPicUrl=this.$store.state.user_headPic
     this.personalBg=this.$store.state.user_bgPic
   },
   methods:{

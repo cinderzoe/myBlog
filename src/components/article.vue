@@ -4,7 +4,10 @@
       <div class="articleList">
         <div class="lists" v-for="(item,i) in articleLists">
           <router-link :to="'/articleDetails'+item.id">
-            <div class="author">{{item.niname}}</div>
+            <div class="author">
+              <div class="head" :style="{'backgroundImage':'url('+item.headImg+')'}"></div>
+              <div class="name">{{item.niname}}</div>
+            </div>
             <div class="title">{{item.title}}</div>
             <div class="content" v-html='item.content'></div>
             <div class="time">{{item.time}}</div>
@@ -97,5 +100,7 @@ a {
 .title{font-size: .47rem;font-weight: bold;color: #333;line-height: 1.5em;}
 .lists{padding:.2rem 0 .4rem;border-bottom: 1px solid #f0f0f0;margin-bottom: .3rem;}
 .content{margin: .1rem 0 .3rem;max-height: 2.97rem;overflow: hidden;}
-.author{padding-left: 1rem;background: url(../assets/user.png) left center no-repeat;background-size: auto 100%;line-height: 2em;}
+.author{padding-bottom: 0.1rem;}
+.author .head{background-position:center;background-repeat: no-repeat;background-size: auto 100%;width: 0.9rem;height: 0.9rem;border-radius: 50%;float: left;border: 1px solid #e4e4e4;box-sizing: border-box;}
+.author .name{line-height: 0.9rem;padding-left: 1.2rem;}
 </style>

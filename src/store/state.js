@@ -1,7 +1,7 @@
 // 初始化状态
 const state = {
     user_name: '',
-    user_headPic:'http://www.lazyzoe.cn/myblog/images/user.jpg',
+    user_headPic:'',
     user_bgPic:'http://www.lazyzoe.cn/myblog/images/selfbg.jpg',
     isLogin:false,
     currentUser:null,

@@ -4,6 +4,7 @@
     <div class="wrap">
       <div class="articleDetails-layout">
         <div class="title">{{this.article.title}}</div>
+        <div class="headImg fl" :style="{'backgroundImage':'url('+this.article.headImg+')'}"></div>
         <div class="person">
           <div class="niname">{{this.article.niname}}</div>
           <div class="time">{{this.article.time}}</div>
@@ -68,7 +69,8 @@ a {
 }
 #articleDetails{text-align: left;}
 #articleDetails .title{font-size: .6rem;font-weight: bold;padding: .2rem 0 .4rem;}
-#articleDetails .person{padding:.1rem 0;padding-left: 1.4rem;background: url(../assets/user.png) left center no-repeat;background-size: auto 1.1rem;background-color: #f0f0f0;color: #ed7961;font-size: .42rem;}
+#articleDetails .person{padding-left: 1.4rem;}
 #articleDetails .time{font-size: .4rem;color: #999;}
 #articleDetails .content{padding:.5rem 0;line-height: 1.8em;white-space: normal;}
+.headImg{width: 1rem;height: 1rem;border-radius: 50%;background-size: cover;background-repeat: no-repeat;background-position: center;}
 </style>

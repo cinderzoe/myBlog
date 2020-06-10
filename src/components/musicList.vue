@@ -11,7 +11,7 @@
     		</div>
     		<div @click="addLove(i)" :class="musicListIt[i].bool?'store-btn loveSong':'store-btn'" style="display: none;"></div>
     	</div>
-    	<p style="color: #999;font-size: 0.4rem;">这里已经是底部了~</p>
+    	<p style="color: #999;font-size: 0.4rem;text-align: center;">这里已经是底部了~</p>
   	</div>
   </div> 
 </template>
