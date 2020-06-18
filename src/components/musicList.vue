@@ -74,6 +74,7 @@ export default {
 	  	var scrollHeight =document.documentElement.scrollHeight || document.body.scrollHeight;//变量scrollHeight是滚动条的总高度
 	  	if (scrollTop + windowHeight == scrollHeight) {
 	  		this.addMoreMusic();
+        this.$toast('滚到底部')
 	  	}
 	  },
 	  addMoreMusic(){
