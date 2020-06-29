@@ -1,6 +1,6 @@
 <template>
 	<div id="writeArticle">
-		<div class="comeBack" @click="$router.replace('/article')"></div>
+		<div class="comeBack" @click="back"></div>
 		<div class="Details-layout">
 			<div class="wrap">
 				<div class="title clear">
@@ -12,9 +12,12 @@
 				<div class="content">
 					<div class="rightRow">
             <div id="editorMenu" class="editorMenu"></div>
-            <div id="editor" class="editor" ref="editor"></div>
+            <div id="editor" class="editor" ref="editor">
+              <div v-html="articleContent"></div>
+            </div>
 					</div>
-					<van-button type="info" @click="submit" class="fr submit">发表</van-button>
+					<van-button v-if="!hasRouteData" type="info" @click="submit" class="fr submit">发表</van-button>
+          <van-button v-else type="info" @click="update" class="fr submit">确定</van-button>
 				</div>
 			</div>
 		</div>
@@ -33,39 +36,60 @@ export default {
      editorContent: '',
      temEditor:null,
      hasSubmit:false,
+     temContent:'',
+     hasRouteData:false,
+     originalTitle:'',
+     originalContent:''
     }
+  },
+  created(){
+    this.$store.commit('musicPlayPause',false);
+    this.$store.commit('changeNavShow',{music:false,user:false,article:false})
   },
   mounted(){
     this.temEditor = new Editor('#editorMenu', '#editor')
     this.temEditor.create()
-  },
-  created(){
-    this.$store.commit('musicPlayPause',false);
-  	this.$store.commit('changeNavShow',{music:false,user:false,article:false})
+    if(this.$route.params.id){
+      console.log(this.$route.params.id)
+      this.hasRouteData=true
+      this.$axios.post('/articleDetailsGet',{
+        id:this.$route.params.id
+      }).then(res=>{
+        console.log(res)
+        this.originalTitle=res.data[0].title
+        this.articleTitle=res.data[0].title
+        this.originalContent=res.data[0].content
+        this.articleContent=res.data[0].content
+        
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
+    
   },
   methods:{
   	submit(){
-      this.articleContent=this.temEditor.txt.html()
-      console.log(this.articleContent)
       if(this.articleTitle==''){
         this.$toast('标题不能为空');
-        return;
+        return false;
       }
       if(this.temEditor.txt.text()==''){
         this.$toast('内容不能为空')
-        return;
+        return false;
       }
       else{
-        console.log(this.articleContent.length)
+        this.getAritcleCont()
         this.$axios.post('/articleWrite',{
          username:this.$store.state.user_name,
          title:this.articleTitle,
+         temContent:this.temContent,
          content:this.articleContent,
          time:this.getTime()
         }).then(res=>{
          console.log(res)
          if(res.status=='200'){
           this.hasSubmit=true
+          this.hasRouteData=true
           this.$router.replace('/article')
          }
         }).catch(err=>{
@@ -73,6 +97,9 @@ export default {
         })
       }
   	},
+    back(){
+      this.$router.go(-1)
+    },
     getTime(){
       var date=new Date()
       var month=this.addZero(date.getMonth()+1)
@@ -81,24 +108,44 @@ export default {
     },
     addZero(val){
       return val<10?'0'+val:val
+    },
+    getAritcleCont(){
+      this.articleContent=this.temEditor.txt.html()
+      this.temContent=this.temEditor.txt.text().slice(0,110)
+    },
+    update(){
+      this.getAritcleCont()
+      this.$axios.post('/articleUpdate',{
+        id:this.$route.params.data[0].id,
+        title:this.articleTitle,
+        temContent:this.temContent,
+        content:this.articleContent
+      }).then(res=>{
+        console.log(res)
+        this.hasSubmit=true
+        this.$toast('编辑成功')
+        this.$router.replace('/user')
+      }).catch(err=>{
+
+      })
     }
   },
   beforeRouteLeave (to, from , next) {
-   if (this.hasSubmit||this.temEditor.txt.text()=='') {
-     next(); // 允许离开或者可以跳到别的路由 上面讲过了
+    if ((this.articleTitle!=='' || this.temEditor.txt.text()!=='') && !this.hasRouteData) {
+      next(false); // 取消离开
+      this.$dialog.confirm({
+        title: '提示',
+        message: '文章未保存，是否离开',
+      })
+      .then(() => {
+        next()
+      })
+      .catch(() => {
+        // on cancel
+      });
     } 
     else {
-     //next(false); // 取消离开
-    this.$dialog.confirm({
-      title: '提示',
-      message: '文章未保存，是否离开',
-    })
-    .then(() => {
       next()
-    })
-    .catch(() => {
-      // on cancel
-    });
     }
   }
 }
@@ -106,17 +153,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
 #writeArticle{text-align: left;padding-top: .3rem;}
 #writeArticle .Details-layout{line-height: 1.2rem;font-size: 0.45rem;}
 #writeArticle .title{padding-left: 1.5rem;position: relative;}
@@ -126,6 +162,7 @@ li {
 #writeArticle .content{padding-top: 0.5rem;}
 #writeArticle .submit{margin-top: 0.3rem;}
 #writeArticle .w-e-toolbar{flex-wrap:wrap!important;}
-#writeArticle .w-e-toolbar .w-e-menu{max-width: 10%;display: inline-block;float: left;padding:0 .25rem;line-height: .8rem;}
-#writeArticle #editor{height:60vh;border: 1px solid #e2e2e2;border-radius: 5px;z-index: 5!important;}
+#writeArticle .w-e-toolbar .w-e-menu{max-width: 10%;display: inline-block;float: left;padding:0 .25rem;line-height: .8rem;z-index: 2!important;}
+#writeArticle #editor{height:60vh;border: 1px solid #e2e2e2;border-radius: 5px;z-index: 5!important;overflow: hidden;}
+.w-e-text{box-sizing: border-box;}
 </style>

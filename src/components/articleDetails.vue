@@ -67,10 +67,12 @@ li {
 a {
   color: #333; 
 }
-#articleDetails{text-align: left;}
+#articleDetails{text-align: left;word-break:break-all;border-radius: 0.2rem;margin:0.2rem 0;}
 #articleDetails .title{font-size: .6rem;font-weight: bold;padding: .2rem 0 .4rem;}
 #articleDetails .person{padding-left: 1.4rem;}
 #articleDetails .time{font-size: .4rem;color: #999;}
 #articleDetails .content{padding:.5rem 0;line-height: 1.8em;white-space: normal;}
 .headImg{width: 1rem;height: 1rem;border-radius: 50%;background-size: cover;background-repeat: no-repeat;background-position: center;}
+.contentText >>> .w-e-text{box-sizing: border-box;}
+.articleDetails-layout{padding:0 0.2rem;}
 </style>

@@ -1,30 +1,20 @@
 <template>
   <div class="Article">
-    <div class="wrap">
-      <div class="articleList">
-        <div class="lists" v-for="(item,i) in articleLists">
-          <router-link :to="'/articleDetails'+item.id">
-            <div class="author">
-              <div class="head" :style="{'backgroundImage':'url('+item.headImg+')'}"></div>
-              <div class="name">{{item.niname}}</div>
-            </div>
-            <div class="title">{{item.title}}</div>
-            <div class="content" v-html='item.content'></div>
-            <div class="time">{{item.time}}</div>
-          </router-link>
-        </div>
-      </div>
-    </div>
+    <list :articleInfo="articleLists"></list>
   </div>
 </template>
 <script>
+import articleList from './articleList'
 export default {
+  name: 'Article',
   data () {
     return {
      articleLists:'',
      text:[],
-     content:''
     }
+  },
+  components:{
+    'list':articleList
   },
   computed:{
     username:{
@@ -53,20 +43,14 @@ export default {
   	this.$store.commit('changeNavShow',{music:false,user:false,article:true})
   },
   methods:{
-  	getUser(){
-  		this.username=this.$store.state.user_name
-  	},
     getArticle(){
       var _this=this
-      _this.$axios.post('/articleGet',{
-        username:_this.username
-      }).then(res=>{
+      _this.$axios.post('/articleGet').then(res=>{
         this.articleLists=res.data
         console.log(this.articleLists)
         for(var key in this.articleLists){
           this.text.push(this.articleLists[key].content)
         }
-        this.content='this.text'
       }).catch(err=>{
         console.log(err)
       })

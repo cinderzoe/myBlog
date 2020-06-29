@@ -24,7 +24,6 @@ export default {
   	this.$store.commit('headerShowOr',false)
   },
   created(){
-    console.log("触发")
     this.getPersonInfo()
   },
   computed:{
@@ -104,7 +103,7 @@ a {
 #user{margin-top: -1.4rem;position: relative;overflow: hidden;min-height: 100vh;}
 .user{left: 0;top: 0;width: 100%;transition: .3s}
 .user.on{transform: translateX(-100%);}
-.userCredit{position: absolute;right: 0;top: 0;width: 100%;transform: translateX(100%);transition: .3s;height: 100%;}
+.userCredit{position: absolute;right: 0;top: 0;width: 100%;transform: translateX(100%);transition: .3s;height: 100%;background-color: #fff;}
 .userCredit.on{transform: translateX(0);}
 .slide-left-enter-active,
 .slide-left-leave-active,

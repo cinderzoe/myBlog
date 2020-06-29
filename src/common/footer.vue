@@ -12,7 +12,7 @@
        </div>
       </router-link>
     </div>
-    <audio :src="audioUrl" id="audio" ref="audio" @error="audioerr" @timeupdate='updateTime' @canplay="getDuration"></audio>
+    <audio :src="audioUrl" id="audio" ref="audio" @error="audioerr" @timeupdate='updateTime' @canplay="getDuration" loop="loop"></audio>
   </div>
 </template>
 
@@ -112,7 +112,7 @@ li {
 a {
   color: #42b983;
 }
-.music-float{position: fixed;right: 0.5rem;bottom: 1rem;width: 1.2rem;height: 1.2rem;border-radius: 50%;overflow: hidden;border: 0.02rem solid #f39a73;z-index: 3;}
+.music-float{position: fixed;right: 0.5rem;bottom: 1rem;width: 1.2rem;height: 1.2rem;border-radius: 50%;overflow: hidden;border: 0.02rem solid #f39a73;z-index: 3;background-color: #eeeeee;}
 .music-inner{position: relative;}
 .play-btn{position: absolute;width: 100%;height: 100%;top: 0;left: 0;display: flex;justify-content: center;align-items: center;}
 .musicRotate{animation: musicRotate 10s linear infinite;}

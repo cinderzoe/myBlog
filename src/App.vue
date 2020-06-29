@@ -29,11 +29,10 @@ export default {
     if(window.localStorage.getItem('tokenid')){
       this.$axios.post('/checktoken',{
         headers:{
-            Authorization:window.localStorage.getItem('tokenid')
-          }
+          Authorization:window.localStorage.getItem('tokenid')
+        }
       })
       .then(res=>{
-        console.log(res)
         if (res.data.status==200) {
           _this.$store.commit('changeUserName', res.data.user)
         }else if(res.data.status=202){
@@ -86,14 +85,15 @@ export default {
 
 <style>
 #app {
-  font-family: '黑体','Avenir', Helvetica, Arial, sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: #333;
   padding: 1.4rem 0 0;
   font-size: 0.45rem;
   min-height: 100vh;
   box-sizing: border-box;
+  background-color: #fafafa;
 }
 .views {
   position: absolute;

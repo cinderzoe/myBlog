@@ -8,7 +8,7 @@ import './assets/public.css'
 import axios from '../node_modules/axios'
 import store from './store/store';
 import 'lib-flexible'
-import {Button,Form,Field,Toast,Slider,ActionSheet,RadioGroup,Radio,Dialog,Area} from 'vant'
+import {Button,Form,Field,Toast,Slider,ActionSheet,RadioGroup,Radio,Dialog,Area,Tab, Tabs} from 'vant'
 import 'es6-promise/auto'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
@@ -27,6 +27,8 @@ Vue.use(Radio)
 Vue.use(RadioGroup)
 Vue.use(Dialog)
 Vue.use(Area)
+Vue.use(Tab)
+Vue.use(Tabs)
 Vue.use(ActionSheet)
 Vue.use(VueAwesomeSwiper)
 Vue.use(vueJsonp)

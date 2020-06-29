@@ -72,13 +72,15 @@ export default {
     }
   },
   mounted(){
-    
+    if(!this.audioId){
+      this.$toast('音乐资源获取失败');
+      this.$router.replace('/music')
+    }
   },
   created(){
     this.lastLyric={};
     this.audioId=this.$store.state.audioId;
     this.musicPic=this.$store.state.bgAudioPic;
-    //this.audioUrl=this.$store.state.bgAudioUrl;
     this.musicName=this.$store.state.musicName;
     this.musicAuthor=this.$store.state.musicAuthor;
     this.currentTime=this.$store.state.currentTime;
@@ -127,11 +129,6 @@ export default {
        var percent;
        var duration=this.duration
        percent=(audioCurTime/duration)*100
-       //console.log(percent)
-       // if(document.getElementsByClassName('van-slider__bar')[0]){
-       //  var slide=document.getElementsByClassName('van-slider__bar')[0]
-       //  slide.style.width=percent
-       // }
        this.audioDuration=percent
        if (timeObj != undefined) { //检测歌词才滚动
          this.lyricScroll(audioCurTime)
