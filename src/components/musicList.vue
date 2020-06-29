@@ -72,9 +72,7 @@ export default {
 	  	var scrollTop =document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset; 
 	  	var windowHeight =document.documentElement.clientHeight || document.body.clientHeight; //变量windowHeight是可视区的高度
 	  	var scrollHeight =document.documentElement.scrollHeight || document.body.scrollHeight;//变量scrollHeight是滚动条的总高度
-      console.log(scrollTop)
-      console.log(windowHeight)
-      console.log(scrollHeight)
+      this.$toast(scrollTop+'/'+windowHeight+'/'+scrollHeight)
 	  	if (scrollTop + windowHeight == scrollHeight) {
 	  		this.addMoreMusic();
         this.$toast('滚到底部')
