@@ -69,14 +69,24 @@ export default {
   		}
   	},
   	handleScroll() {
-	  	var scrollTop =document.documentElement.scrollTop || document.body.scrollTop; 
+	  	var scrollTop =document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset; 
 	  	var windowHeight =document.documentElement.clientHeight || document.body.clientHeight; //变量windowHeight是可视区的高度
 	  	var scrollHeight =document.documentElement.scrollHeight || document.body.scrollHeight;//变量scrollHeight是滚动条的总高度
+      console.log(scrollTop)
+      console.log(windowHeight)
+      console.log(scrollHeight)
 	  	if (scrollTop + windowHeight == scrollHeight) {
 	  		this.addMoreMusic();
         this.$toast('滚到底部')
 	  	}
-	  },
+     //  let scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;//页面滚动高度
+     //  let windowHeight=window.innerHeight;//窗口高度
+     //  let card_sectionTop=card_section.offsetTop;//card_section距离顶部的偏移高度（card_section为你的照片或div元素ID）
+     //  let card_sectionHeight=card_section.offsetHeight;//card_section的高度
+     //  if(card_sectionTop+card_sectionHeight<scroll+windowHeight){
+     //          this.$toast('滚到底部')
+	    // }
+    },
 	  addMoreMusic(){
 	  	var minLength=this.musicLists.length;
 	  	var maxLength=this.musicLists.length+10
