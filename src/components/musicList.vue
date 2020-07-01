@@ -9,7 +9,7 @@
     				<div class="author">{{item.ar[0].name}}</div>
     			</div>
     		</div>
-    		<div @click="addLove(i)" :class="musicListIt[i].bool?'store-btn loveSong':'store-btn'" style="display: none;"></div>
+    		<!-- <div @click="addLove(i)" :class="musicListIt[i].bool?'store-btn loveSong':'store-btn'"></div> -->
     	</div>
     	<p style="color: #999;font-size: 0.4rem;text-align: center;">这里已经是底部了~</p>
   	</div>
@@ -37,16 +37,17 @@ export default {
   beforeMount(){
   	this.$axios.post('http://hellojinx.cn:4000/top/list?idx=0')
     .then(res=>{
-  		this.musicAll=res.data.playlist.tracks;
-  		this.musicLists=this.musicAll.slice(0,15)
-  		this.addBool()
+      this.musicLists=res.data.playlist.tracks;
+  		// this.musicAll=res.data.playlist.tracks;
+  		// this.musicLists=this.musicAll.slice(0,15)
+  		// this.addBool()
   	}).catch(err=>{
   		console.log(err)
   	})
   },
-  mounted(){
-	  window.addEventListener("scroll", this.handleScroll, false);
-  },
+  // mounted(){
+	 //  window.addEventListener("scroll", this.handleScroll, false);
+  // },
   methods:{
   	selectMusic(i,picUrl,musicId,musicName,musicAuthor){
   		if(this.musicIndex==i){
@@ -68,16 +69,16 @@ export default {
   			}
   		}
   	},
-  	handleScroll() {
-	  	var scrollTop =document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset; 
-	  	var windowHeight =document.documentElement.clientHeight || document.body.clientHeight; //变量windowHeight是可视区的高度
-	  	var scrollHeight =document.documentElement.scrollHeight || document.body.scrollHeight;//变量scrollHeight是滚动条的总高度
-      this.$toast(scrollTop+'/'+windowHeight+'/'+scrollHeight)
-	  	if (scrollTop + windowHeight == scrollHeight) {
-	  		this.addMoreMusic();
-        this.$toast('滚到底部')
-	  	}
-    },
+  	// handleScroll() {
+	  // 	var scrollTop =document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset; 
+	  // 	var windowHeight =document.documentElement.clientHeight || document.body.clientHeight; //变量windowHeight是可视区的高度
+	  // 	var scrollHeight =document.documentElement.scrollHeight || document.body.scrollHeight;//变量scrollHeight是滚动条的总高度
+   //    this.$toast(scrollTop+'/'+windowHeight+'/'+scrollHeight)
+	  // 	if (scrollTop + windowHeight == scrollHeight) {
+	  // 		this.addMoreMusic();
+   //      this.$toast('滚到底部')
+	  // 	}
+   //  },
 	  addMoreMusic(){
 	  	var minLength=this.musicLists.length;
 	  	var maxLength=this.musicLists.length+10
@@ -98,9 +99,6 @@ export default {
       }
     }
   },
-  destroyed () {
-    window.removeEventListener('scroll', this.handleScroll) //  离开页面清除（移除）滚轮滚动事件
-  }
   
 }
 </script>

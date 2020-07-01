@@ -59,6 +59,7 @@ export default {
   		}
   		else{
   			var _this=this;
+        console.log(this.username)
   			this.$axios.post('/login', {
               username: this.username,
               password: this.password
